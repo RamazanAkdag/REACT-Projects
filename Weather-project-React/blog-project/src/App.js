@@ -13,7 +13,7 @@ export default class App extends Component {
   }
 
   getResult = (cityName) => {
-    const apiKey = "bb1bd49706ebc1f81ee537163ee41dd6";
+    const apiKey = "{{urApiKey}}";
     const apiURI = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
     axios
