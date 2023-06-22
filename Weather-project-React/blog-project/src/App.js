@@ -14,26 +14,26 @@ export default class App extends Component {
 
   getResult = (cityName) => {
     const apiKey = "{{urApiKey}}";
-    const apiURI = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+    const apiURI = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;//api uri
 
-    axios
+    axios // Get Request from api
       .get(apiURI)
-      .then((res) => res.data)
+      .then((res) => res.data)// take data of response
       .then((data) => {
         console.log(data);
-        this.setState({ fetchRes: data }, () => {
-          //console.log("State güncellendi:", this.state.fetchRes);
+        this.setState({ fetchRes: data }, () => {// define data to our state
+          //console.log("State güncellendi:", this.state.fetchRes);//state updated
         });
       })
       .catch((err) => console.log(err));
   };
 
-  setQuery = (e) => {
-    if (e.keyCode === 13) {
+  setQuery = (e) => {//eventListener for input keypress
+    if (e.keyCode === 13) {// enter pressed
       //entera basıldı
       // console.log(e.target.value);
-      const city = e.target.value;
-      this.getResult(city);
+      const city = e.target.value;// get city name from user
+      this.getResult(city);// get request to api
     }
   };
 
@@ -42,9 +42,12 @@ export default class App extends Component {
     let temp;
     let desc;
     let minmax;
-    if (Object.keys(this.state.fetchRes).length === 0) {
+    if (Object.keys(this.state.fetchRes).length === 0) {// if our fetcchre state is empty. our values = ""
       cityInfo = "";
-    } else {
+      temp = "";
+       desc = "";
+       minmax = "";
+    } else {                                            // if it isn't empty get All values from fetchres state
       /*console.log(
         `${this.state.fetchRes.name},${this.state.fetchRes.sys.country}`
       );*/
@@ -58,6 +61,7 @@ export default class App extends Component {
         "C";
     }
 
+    // Show weather info to user
     return (
       <div className="container">
         <div className="header">
